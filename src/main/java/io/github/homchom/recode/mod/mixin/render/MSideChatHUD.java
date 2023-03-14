@@ -77,7 +77,7 @@ public abstract class MSideChatHUD {
     public abstract void drawTagIcon(PoseStack poseStack, int x, int y, GuiMessageTag.Icon icon);
 
     @Inject(method = "render", at = @At("HEAD"), cancellable = true)
-    private void render(PoseStack poseStack, int tickDelta, CallbackInfo ci) {
+    private void render(PoseStack poseStack, int i, int j, int k, CallbackInfo ci) {
         List<GuiMessage.Line> tempMain = new ArrayList<>();
         List<GuiMessage.Line> tempSide = new ArrayList<>();
         if (Config.getBoolean("stackDuplicateMsgs")) {
@@ -89,9 +89,9 @@ public abstract class MSideChatHUD {
             sideVisibleMessages.addAll(stackMsgs(tempSide));
         }
 
-        int renderedLines = renderChat(poseStack, tickDelta, trimmedMessages, 0, getWidth(),
+        int renderedLines = renderChat(poseStack, 0, trimmedMessages, 0, getWidth(),
                 chatScrollbarPos);
-        renderChat(poseStack, tickDelta, sideVisibleMessages, getSideChatStartX(),
+        renderChat(poseStack, 0, sideVisibleMessages, getSideChatStartX(),
             getSideChatWidth(), sideScrolledLines);
         renderOthers(poseStack, renderedLines);
         ci.cancel();
