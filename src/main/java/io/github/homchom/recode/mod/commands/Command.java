@@ -4,6 +4,7 @@ import com.mojang.brigadier.CommandDispatcher;
 import io.github.homchom.recode.sys.player.chat.*;
 import net.fabricmc.fabric.api.client.command.v2.FabricClientCommandSource;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.multiplayer.ClientPacketListener;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.commands.CommandBuildContext;
 import net.minecraft.network.chat.Component;
@@ -30,9 +31,9 @@ public abstract class Command {
     }
 
     protected void sendCommand(Minecraft mc, String message) {
-        LocalPlayer player = mc.player;
-        if (player != null) {
-            player.commandUnsigned(message);
+        ClientPacketListener connection = mc.getConnection();
+        if (connection != null) {
+            connection.sendUnsignedCommand(message);
         }
     }
 

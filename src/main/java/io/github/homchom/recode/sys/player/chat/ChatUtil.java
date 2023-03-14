@@ -31,7 +31,7 @@ public class ChatUtil {
     }
 
     public static void command(String message) {
-        Minecraft.getInstance().player.commandUnsigned(message);
+        Minecraft.getInstance().getConnection().sendUnsignedCommand(message);
     }
 
     public static void executeCommand(String command) {
@@ -77,7 +77,7 @@ public class ChatUtil {
             player.displayClientMessage(Component.literal(chatType.getString() + " ").append(text), false);
             if (chatType == ChatType.FAIL) {
                 if (Config.getBoolean("errorSound")) {
-                    player.playNotifySound(SoundEvents.NOTE_BLOCK_DIDGERIDOO, SoundSource.PLAYERS, 2, 0);
+                    player.playNotifySound(SoundEvents.NOTE_BLOCK_DIDGERIDOO.value(), SoundSource.PLAYERS, 2, 0);
                 }
             }
         }

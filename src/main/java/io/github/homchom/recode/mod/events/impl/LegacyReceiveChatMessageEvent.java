@@ -27,6 +27,7 @@ public class LegacyReceiveChatMessageEvent {
         Minecraft mc = Minecraft.getInstance();
 
         if (mc.player == null) return false;
+        if (mc.getConnection() == null) return false;
 
         String stripped = message.getString();
         String msg = stripped.replaceAll("§.", "");
@@ -36,7 +37,7 @@ public class LegacyReceiveChatMessageEvent {
         //Auto //wand
         if (Config.getBoolean("autowand")) {
             if (msg.contains("You are now in build mode.")) {
-                mc.player.commandUnsigned("/wand");
+                mc.getConnection().sendUnsignedCommand("/wand");
             }
         }
 
@@ -58,7 +59,7 @@ public class LegacyReceiveChatMessageEvent {
                     String cmd = "/join " + id;
 
                     if (cmd.matches("/join \\d+")) {
-                        mc.player.commandUnsigned(cmd);
+                        mc.getConnection().sendUnsignedCommand(cmd);
                     } else {
                         ChatUtil.sendMessage("Error while trying to join the plot.", ChatType.FAIL);
                     }
@@ -171,7 +172,7 @@ public class LegacyReceiveChatMessageEvent {
                     try {
                         Thread.sleep(3000);
                     } catch (Exception ignored) {}
-                    mc.player.commandUnsigned("tip " + tipPlayer);
+                    mc.getConnection().sendUnsignedCommand("tip " + tipPlayer);
                 });
             }
         }

@@ -10,12 +10,14 @@ public class FlightSpeedToggle {
     private final float normalFs = percentToFs(Config.getInteger("fsNormal"));
 
     public void toggleFlightSpeed(int percent) {
-        LocalPlayer player = Minecraft.getInstance().player;
+        Minecraft mc = Minecraft.getInstance();
+        LocalPlayer player = mc.player;
         Objects.requireNonNull(player);
+        Objects.requireNonNull(mc.getConnection());
 
         float current = player.getAbilities().getFlyingSpeed();
         int target = current == normalFs ? percent : Config.getInteger("fsNormal");
-        player.commandUnsigned("fs " + target);
+        mc.getConnection().sendUnsignedCommand("fs " + target);
     }
 
     // TODO: globalize or automate

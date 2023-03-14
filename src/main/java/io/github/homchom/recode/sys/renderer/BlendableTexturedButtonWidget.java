@@ -16,9 +16,9 @@ public class BlendableTexturedButtonWidget extends ImageButton {
         super(x, y, width, height, u, v, hoveredVOffset, texture, textureWidth, textureHeight, pressAction, Component.empty());
     }
 
-    public BlendableTexturedButtonWidget(int i, int j, int k, int l, int m, int n, int o, ResourceLocation identifier, int p, int q, OnPress pressAction, Component text) {
-        super(i, j, k, l, m, n, o, identifier, p, q, pressAction, NO_TOOLTIP, text);
-    }
+//    public BlendableTexturedButtonWidget(int i, int j, int k, int l, int m, int n, int o, ResourceLocation identifier, int p, int q, OnPress pressAction, Component text) {
+//        super(i, j, k, l, m, n, o, identifier, p, q, pressAction, NO_TOOLTIP, text);
+//    }
 
     @Override
     public void renderButton(PoseStack matrices, int mouseX, int mouseY, float delta) {
