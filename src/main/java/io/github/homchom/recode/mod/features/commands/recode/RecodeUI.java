@@ -24,7 +24,7 @@ public class RecodeUI extends LightweightGuiDescription implements IMenu {
 
         CImage cImage = new CImage(CODEUTILS_LOGO);
         cImage.setSize(120, 120);
-        root.add(cImage, 46, 0);
+        root.add(cImage, (220 / 2) - (120 / 2), 0);
 
         root.add(new WLabel(Component.literal("recode")), (220 - Minecraft.getInstance().font.width("recode")) / 2, 110);
         root.add(new WLabel(Component.literal("v" + Recode.INSTANCE.getVersion())), (220 - Minecraft.getInstance().font.width("v" + Recode.INSTANCE.getVersion())) / 2, 120);
