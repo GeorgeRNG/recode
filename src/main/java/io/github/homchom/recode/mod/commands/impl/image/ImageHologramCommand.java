@@ -19,7 +19,7 @@ public class ImageHologramCommand extends AbstractImageCommand {
 
     @Override
     public void register(Minecraft mc, CommandDispatcher<FabricClientCommandSource> cd, CommandBuildContext context) {
-        cd.register(ArgBuilder.literal("imagehologram")
+        cd.register(ArgBuilder.literal("imagehologram").executes(ctx -> sendInvalidParamsMessage("/load <hex|colorcodes> <file>"))
                 .then(ArgBuilder.literal("load")
                         .then(ArgBuilder.literal("hex")
                                 .then(locationArgument(true)))
