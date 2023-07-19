@@ -17,7 +17,7 @@ public class NBSSearchCommand extends Command {
 
     @Override
     public void register(Minecraft mc, CommandDispatcher<FabricClientCommandSource> cd, CommandBuildContext context) {
-        cd.register(literal("nbssearch")
+        cd.register(literal("nbssearch").executes(ctx -> sendParams("/nbssearch <query>"))
             .then(argument("query", StringArgumentType.greedyString())
                 .executes(ctx -> {
                     if (!Minecraft.getInstance().player.isCreative()) {

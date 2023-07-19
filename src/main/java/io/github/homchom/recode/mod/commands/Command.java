@@ -48,10 +48,10 @@ public abstract class Command {
         }
     }
 
-    protected int sendInvalidParamsMessage() {
-        return sendInvalidParamsMessage("");
+    protected int sendParams() {
+        return sendParams("");
     }
-    protected int sendInvalidParamsMessage(@Nullable String customMessage) {
+    protected int sendParams(@Nullable String customMessage) {
         ChatUtil.sendMessage("Invalid parameters. " + customMessage, ChatType.FAIL);
         return -1;
     }

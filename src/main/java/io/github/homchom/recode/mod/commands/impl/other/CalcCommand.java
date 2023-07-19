@@ -114,7 +114,7 @@ public class CalcCommand extends Command {
 
     @Override
     public void register(Minecraft mc, CommandDispatcher<FabricClientCommandSource> cd, CommandBuildContext context) {
-        cd.register(ArgBuilder.literal("calc")
+        cd.register(ArgBuilder.literal("calc").executes(ctx -> sendParams("/calc <expression>"))
             .then(ArgBuilder.argument("exp", StringArgumentType.greedyString())
                 .executes(CalcCommand::exec)
             )

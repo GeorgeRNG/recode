@@ -15,7 +15,7 @@ public class PJoinCommand extends Command {
 
     @Override
     public void register(Minecraft mc, CommandDispatcher<FabricClientCommandSource> cd, CommandBuildContext context) {
-        cd.register(ArgBuilder.literal("pjoin")
+        cd.register(ArgBuilder.literal("pjoin").executes(ctx -> sendParams("/pjoin <player>"))
                 .then(ArgBuilder.argument("player", PlayerArgumentType.player())
                         .executes(ctx -> {
                             try {

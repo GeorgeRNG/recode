@@ -20,7 +20,7 @@ public class GiveCommand extends Command {
 
     @Override
     public void register(Minecraft mc, CommandDispatcher<FabricClientCommandSource> cd, CommandBuildContext context) {
-        cd.register(ArgBuilder.literal("dfgive")
+        cd.register(ArgBuilder.literal("dfgive").executes(ctx -> sendParams("/dfgive <item|clipboard> [count][reset]"))
                 .then(ArgBuilder.argument("item", ItemArgument.item(context))
                         .then(ArgBuilder.argument("count", IntegerArgumentType.integer())
                                 .executes(ctx -> {
@@ -59,6 +59,10 @@ public class GiveCommand extends Command {
 
                             if (clipboard.startsWith("@p ") || clipboard.startsWith("@s ")) {
                                 clipboard = clipboard.substring(3);
+                            }
+
+                            if(clipboard.startsWith("clipboard")) {
+                                ChatUtil.sendMessage("You can't give yourself the clipboard!", ChatType.FAIL);
                             }
 
                             this.sendCommand(mc, "dfgive " + clipboard);

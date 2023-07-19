@@ -28,7 +28,7 @@ public class NodeCommand extends Command {
 
     @Override
     public void register(Minecraft mc, CommandDispatcher<FabricClientCommandSource> cd, CommandBuildContext context) {
-        LiteralArgumentBuilder<FabricClientCommandSource> cmd = ArgBuilder.literal("node");
+        LiteralArgumentBuilder<FabricClientCommandSource> cmd = ArgBuilder.literal("node").executes(ctx -> sendParams("/node <1-7|beta>"));
 
         for (Map.Entry<String, String> node : NODE_MAP.entrySet()) {
             cmd.then(ArgBuilder.literal(node.getKey()).executes((ctx) -> {

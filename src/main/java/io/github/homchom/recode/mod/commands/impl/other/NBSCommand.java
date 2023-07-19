@@ -61,8 +61,8 @@ public class NBSCommand extends Command {
 
     @Override
     public void register(Minecraft mc, CommandDispatcher<FabricClientCommandSource> cd, CommandBuildContext context) {
-        cd.register(ArgBuilder.literal("nbs")
-                .then(ArgBuilder.literal("load")
+        cd.register(ArgBuilder.literal("nbs").executes(ctx -> sendParams("/nbs <player|load <file>>"))
+                .then(ArgBuilder.literal("load").executes(ctx -> sendParams("/nbs load <file>"))
                         .then(ArgBuilder.argument("filename", PathArgumentType.folder(ExternalFile.NBS_FILES.getPath(), true))
                                 .executes(ctx -> {
                                     if (this.isCreative(mc)) {

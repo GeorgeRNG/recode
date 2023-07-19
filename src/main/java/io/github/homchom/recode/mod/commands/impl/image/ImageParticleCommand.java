@@ -19,8 +19,8 @@ import java.nio.file.Path;
 public class ImageParticleCommand extends AbstractImageCommand {
     @Override
     public void register(Minecraft mc, CommandDispatcher<FabricClientCommandSource> cd, CommandBuildContext context) {
-        cd.register(ArgBuilder.literal("imageparticle")
-                .then(ArgBuilder.literal("load").then(fileArgument(this::execute)))
+        cd.register(ArgBuilder.literal("imageparticle").executes(ctx -> sendParams("/imageparticle <load <file>|printer>"))
+                .then(ArgBuilder.literal("load").executes(ctx -> sendParams("/imageparticle load <file>")).then(fileArgument(this::execute)))
                 .then(ArgBuilder.literal("printer")
                         .executes(ctx -> {
                             Templates.giveInternalTemplate(
