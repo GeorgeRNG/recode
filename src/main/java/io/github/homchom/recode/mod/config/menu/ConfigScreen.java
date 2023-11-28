@@ -56,7 +56,7 @@ public class ConfigScreen implements ITranslatable {
 
         List<ConfigGroup> groups = CONFIG.getRegistered();
 
-        UUID playerUUID = Minecraft.getInstance().getUser().getGameProfile().getId();
+        UUID playerUUID = Minecraft.getInstance().getUser().getProfileId();
 
         // Optimized loop
         for (ConfigGroup group : groups) {

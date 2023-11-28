@@ -3,17 +3,18 @@ package io.github.homchom.recode.sys.renderer;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.ImageButton;
+import net.minecraft.client.gui.components.WidgetSprites;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 
 public class BlendableTexturedButtonWidget extends ImageButton {
 
-    public BlendableTexturedButtonWidget(int x, int y, int width, int height, int u, int v, int hoveredVOffset, ResourceLocation texture, OnPress pressAction) {
-        super(x, y, width, height, u, v, hoveredVOffset, texture, 256, 256, pressAction);
-    }
+//    public BlendableTexturedButtonWidget(int x, int y, int width, int height, int u, int v, int hoveredVOffset, ResourceLocation texture, OnPress pressAction) {
+//        super(x, y, width, height, u, v, hoveredVOffset, texture, 256, 256, pressAction);
+//    }
 
-    public BlendableTexturedButtonWidget(int x, int y, int width, int height, int u, int v, int hoveredVOffset, ResourceLocation texture, int textureWidth, int textureHeight, OnPress pressAction) {
-        super(x, y, width, height, u, v, hoveredVOffset, texture, textureWidth, textureHeight, pressAction, Component.empty());
+    public BlendableTexturedButtonWidget(int x, int y, int width, int height, WidgetSprites sprites, OnPress pressAction) {
+        super(x, y, width, height, sprites, pressAction, Component.empty());
     }
 
     @Override

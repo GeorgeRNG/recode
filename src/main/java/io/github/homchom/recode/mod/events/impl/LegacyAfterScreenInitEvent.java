@@ -7,6 +7,7 @@ import net.fabricmc.fabric.api.client.screen.v1.ScreenEvents;
 import net.fabricmc.fabric.api.client.screen.v1.Screens;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.components.AbstractWidget;
+import net.minecraft.client.gui.components.WidgetSprites;
 import net.minecraft.client.gui.screens.ConnectScreen;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.TitleScreen;
@@ -47,10 +48,12 @@ public class LegacyAfterScreenInitEvent {
 		}
 
 		if (index != -1) {
-			buttons.add(index, new BlendableTexturedButtonWidget(screen.width / 2 + 104, y, 20, 20, 0, 0, 20, icon, 20, 40,
+			// TODO: check this
+			WidgetSprites sprites = new WidgetSprites(icon,icon);
+			buttons.add(index, new BlendableTexturedButtonWidget(screen.width / 2 + 104, y, 20, 20, sprites,
 					(button) -> {
 						String address = "mcdiamondfire.com:25565";
-						ServerData serverInfo = new ServerData("DF", address, false);
+						ServerData serverInfo = new ServerData("DF", address, ServerData.Type.OTHER);
 						ConnectScreen.startConnecting(screen, mc, ServerAddress.parseString(address), serverInfo, false);
 					}));
 		}

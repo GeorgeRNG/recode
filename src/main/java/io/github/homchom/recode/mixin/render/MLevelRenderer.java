@@ -6,7 +6,7 @@ import io.github.homchom.recode.render.*;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.LevelRenderer;
 import net.minecraft.client.renderer.PostChain;
-import net.minecraft.client.renderer.chunk.ChunkRenderDispatcher;
+import net.minecraft.client.renderer.chunk.SectionRenderDispatcher;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import org.jetbrains.annotations.NotNull;
@@ -45,9 +45,9 @@ public abstract class MLevelRenderer implements RecodeLevelRenderer {
 	}
 
 	@Redirect(method = "renderLevel", at = @At(value = "INVOKE",
-			target = "Lnet/minecraft/client/renderer/chunk/ChunkRenderDispatcher$CompiledChunk;getRenderableBlockEntities()Ljava/util/List;"
+			target = "Lnet/minecraft/client/renderer/chunk/SectionRenderDispatcher$CompiledSection;getRenderableBlockEntities()Ljava/util/List;"
 	))
-	private List<BlockEntity> interceptChunkBlockEntities(ChunkRenderDispatcher.CompiledChunk chunk) {
+	private List<BlockEntity> interceptChunkBlockEntities(SectionRenderDispatcher.CompiledSection chunk) {
 		var blockEntities = chunk.getRenderableBlockEntities();
 		if (blockEntities.isEmpty()) return blockEntities;
 

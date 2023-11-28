@@ -14,6 +14,8 @@ import net.minecraft.client.renderer.texture.DynamicTexture;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NbtUtils;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.Services;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -47,21 +49,21 @@ public abstract class MAbstractContainerScreen {
                         GameProfile gameProfile = null;
                         if (stack.hasTag()) {
                             CompoundTag compoundTag = stack.getTag();
-                            if (compoundTag.contains("SkullOwner", 8) && !StringUtils.isBlank(compoundTag.getString("SkullOwner"))) {
-                                gameProfile = new GameProfile(null, compoundTag.getString("SkullOwner"));
-                                compoundTag.remove("SkullOwner");
-                                SkullBlockEntity.updateGameprofile(gameProfile, p ->
-                                        compoundTag.put("SkullOwner", NbtUtils.writeGameProfile(new CompoundTag(), p))
-                                );
-                            }
+//                            if (compoundTag.contains("SkullOwner", 8) && !StringUtils.isBlank(compoundTag.getString("SkullOwner"))) {
+//                                gameProfile = new GameProfile(null, compoundTag.getString("SkullOwner"));
+//                                compoundTag.remove("SkullOwner");
+//                                SkullBlockEntity.setup(, p ->
+//                                        compoundTag.put("SkullOwner", null/*NbtUtils.writeGameProfile(new CompoundTag(), finalGameProfile)*/)
+//                                );
+//                            }
                             gameProfile = NbtUtils.readGameProfile(compoundTag.getCompound("SkullOwner"));
                         }
 
                         Minecraft mc = Minecraft.getInstance();
 
-                        Map<Type, MinecraftProfileTexture> textures = mc.getSkinManager().getInsecureSkinInformation(gameProfile);
-                        if (textures.containsKey(Type.SKIN)) {
-                            URL url = new URL(textures.get(Type.SKIN).getUrl());
+                        var textures = mc.getSkinManager().getInsecureSkin(gameProfile);
+                        if (textures.textureUrl() != null) {
+                            URL url = new URL(textures.textureUrl());
 
                             if (!cache.containsKey(url.toString())) {
                                 cache.put(url.toString(), null);
@@ -70,9 +72,10 @@ public abstract class MAbstractContainerScreen {
                                 cache.put(url.toString(), id);
                             }
                             if (cache.get(url.toString()) != null) {
-                                TexturedOtherPlayerEntity entity = new TexturedOtherPlayerEntity(cache.get(url.toString()));
+
+                                LivingEntity entity = new TexturedOtherPlayerEntity(cache.get(url.toString()));
                                 // TODO: replace with quaternion-based method?
-                                InventoryScreen.renderEntityInInventoryFollowsMouse(guiGraphics, mc.screen.width/5, mc.screen.height/2+20, 40, -20, -20, entity);
+                                InventoryScreen.renderEntityInInventoryFollowsMouse(guiGraphics, mc.screen.width/5, mc.screen.height/2+20, mc.screen.width/5 + 105, mc.screen.height+20+49, 20, 1, i, j, entity);
                             }
                         }
                     }
